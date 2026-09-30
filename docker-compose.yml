@@ -1,0 +1,15 @@
+#it is used connect the backend and frontend containers together, so they can communicate with each other
+
+services:
+ 
+  frontend:
+    build: .  # Keeps building the frontend from your current VS Code folder
+    ports:
+      - "5173:5173"
+    networks:
+      - shared-network
+    
+networks:
+  shared-network:
+    external: true
+    name: jewellery-shared-network
