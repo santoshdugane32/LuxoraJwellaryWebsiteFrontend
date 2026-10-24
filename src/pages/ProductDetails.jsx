@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 import {
   Heart,
   Share2,
@@ -49,13 +51,13 @@ export default function ProductDetails() {
         setLoading(true);
 
         const productRes = await axios.get(
-          `http://localhost:8080/api/products/${id}`
+          `${API_BASE_URL}/api/products/${id}`
         );
 
         setProduct(productRes.data);
 
         const priceRes = await axios.get(
-          `http://localhost:8080/api/product-price/${id}`
+          `${API_BASE_URL}/api/product-price/${id}`
         );
 
         setPrice(Number(priceRes.data));

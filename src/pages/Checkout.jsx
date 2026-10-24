@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { getUser, getCartKey } from "../utils/cartUtils";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Checkout() {
 
     const navigate = useNavigate();
@@ -122,7 +124,7 @@ export default function Checkout() {
 
             const orderRes = await axios.post(
 
-                "http://localhost:8080/api/orders",
+                `${API_BASE_URL}/api/orders`,
 
                 {
 
@@ -158,7 +160,7 @@ export default function Checkout() {
 
             const paymentRes = await axios.post(
 
-                "http://localhost:8080/api/payment/create-order",
+                `${API_BASE_URL}/api/payment/create-order`,
 
                 {
 
@@ -253,7 +255,7 @@ export default function Checkout() {
 
                         await axios.post(
 
-                            "http://localhost:8080/api/payment/verify",
+                            `${API_BASE_URL}/api/payment/verify`,
 
                             {
 

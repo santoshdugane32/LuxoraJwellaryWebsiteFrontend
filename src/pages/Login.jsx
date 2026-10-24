@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Login() {
 
   const [loginData, setLoginData] = useState({
@@ -52,7 +54,7 @@ export default function Login() {
       console.log("LOGIN REQUEST:", loginData);
 
       const response = await axios.post(
-        "http://localhost:8080/api/users/login",
+        `${API_BASE_URL}/api/users/login`,
         loginData
       );
 

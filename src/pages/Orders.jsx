@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Orders() {
 
     const [orders, setOrders] = useState([]);
@@ -12,7 +14,7 @@ export default function Orders() {
 
         if (!token) return;
 
-        axios.get("http://localhost:8080/api/orders/my-orders", {
+        axios.get(`${API_BASE_URL}/api/orders/my-orders`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

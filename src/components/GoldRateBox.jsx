@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function GoldRateBox() {
   const [rate, setRate] = useState(null);
 
@@ -10,7 +12,7 @@ export default function GoldRateBox() {
 
   const fetchRate = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/gold-rate");
+      const res = await axios.get(`${API_BASE_URL}/api/gold-rate`);
       setRate(res.data);
     } catch (err) {
       console.log(err);

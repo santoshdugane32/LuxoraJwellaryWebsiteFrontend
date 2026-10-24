@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function ProductPrice() {
   const [price, setPrice] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/product-price/1")
+    axios.get(`${API_BASE_URL}/api/product-price/1`)
       .then(res => {
         setPrice(Number(res.data)); // ensure number
       })

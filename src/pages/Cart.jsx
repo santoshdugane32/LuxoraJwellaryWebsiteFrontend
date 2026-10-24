@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
 
@@ -34,11 +35,11 @@ export default function Cart() {
         saved.map(async (item) => {
 
           const productRes = await axios.get(
-            `http://localhost:8080/api/products/${item.id}`
+            `${API_BASE_URL}/api/products/${item.id}`
           );
 
           const priceRes = await axios.get(
-            `http://localhost:8080/api/product-price/${item.id}`
+            `${API_BASE_URL}/api/product-price/${item.id}`
           );
 
           return {
@@ -78,11 +79,11 @@ export default function Cart() {
       const updated = await Promise.all(
         data.map(async (item) => {
           const productRes = await axios.get(
-            `http://localhost:8080/api/products/${item.id}`
+            `${API_BASE_URL}/api/products/${item.id}`
           );
 
           const priceRes = await axios.get(
-            `http://localhost:8080/api/product-price/${item.id}`
+            `${API_BASE_URL}/api/product-price/${item.id}`
           );
 
           return {

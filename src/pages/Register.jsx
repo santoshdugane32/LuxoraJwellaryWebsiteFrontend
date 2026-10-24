@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Register() {
 
     const [user, setUser] = useState({
@@ -38,7 +40,7 @@ export default function Register() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8080/api/users/register",
+                `${API_BASE_URL}/api/users/register`,
                 user
             );
 

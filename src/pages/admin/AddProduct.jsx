@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function AddProduct() {
 
     const [product, setProduct] = useState({
@@ -38,7 +40,7 @@ export default function AddProduct() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8080/api/products",
+                `${API_BASE_URL}/api/products`,
                 {
                     ...product,
                     stock: Number(product.stock),
