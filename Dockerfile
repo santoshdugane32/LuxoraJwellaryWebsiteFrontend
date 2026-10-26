@@ -2,29 +2,29 @@
 # 1. Build the React + Vite frontend
 FROM node:22-alpine AS build
 
-# 2. Set working directory
 WORKDIR /app
 
-# 3. Copy dependency files
+# Copy dependency files
 COPY package*.json ./
 
-# 4. Install dependencies
+# Install dependencies
 RUN npm ci
 
-# 5. Copy frontend source code
+# Copy frontend source code
 COPY . .
 
-# 6. Build production files into /app/dist
+# Build production files
 RUN npm run build
 
-# 7. Production stage: Nginx serves the frontend
+# 2. Serve frontend using Nginx
 FROM nginx:alpine
 
-# 8. Copy built React files into Nginx
+# Copy React production files
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# 9. Expose HTTP port
+# Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
-# 10. Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
