@@ -16,22 +16,25 @@ const collections = [
     eyebrow: "MADE TO BE ADMIRED",
     title: "Statement Rings",
     description: "Little details. Extraordinary presence.",
+    // Woman's hand gracefully showcasing luxury diamond & gold rings
     image:
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1100&q=90",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "GOLDEN MOMENTS",
     title: "Gold Necklaces",
     description: "Graceful designs made to be treasured.",
+    // Elegant woman wearing layered luxury gold necklace
     image:
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1100&q=90",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "THE PERFECT FINISH",
     title: "Fine Earrings",
     description: "A little brilliance for every occasion.",
+    // High-fashion woman wearing sparkling drop earrings
     image:
-      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1100&q=90",
+      "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1200&q=85",
   },
 ];
 
@@ -82,16 +85,14 @@ export default function Home() {
 
           <h1 className="max-w-xl font-serif text-5xl leading-[1.08] tracking-tight sm:text-6xl md:text-7xl xl:text-[82px]">
             Elegance
-            <span className="block italic text-[#d9bd82]">
-              made
-            </span>
+            <span className="block italic text-[#d9bd82]">made</span>
             personal.
           </h1>
 
           <p className="mt-7 max-w-lg text-base leading-8 text-stone-400 sm:text-lg">
-            Jewelry is more than an accessory. It is a reflection
-            of your story, your confidence, and the moments you
-            want to keep forever. Find your signature piece at LUXORA.
+            Jewelry is more than an accessory. It is a reflection of your story,
+            your confidence, and the moments you want to keep forever. Find your
+            signature piece at LUXORA.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -141,24 +142,25 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Luxury jewelry hero image — no portrait */}
+        {/* Luxury Hero Image with Editorial Woman Portrait */}
         <div className="relative mx-auto w-full max-w-2xl">
           <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/15 blur-3xl" />
 
           <div className="relative overflow-hidden rounded-[28px] border border-[#d9bd82]/25 bg-[#17130e]">
             <img
-              src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1400&q=90"
-              alt="Elegant gold jewelry styled for a luxury editorial"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85"
+              alt="Editorial portrait of an elegant woman wearing luxury gold and diamond jewelry"
               fetchPriority="high"
-              className="h-[470px] w-full object-cover object-center sm:h-[580px] lg:h-[660px]"
+              className="h-[470px] w-full object-cover object-top sm:h-[580px] lg:h-[660px]"
               onError={(event) => {
-                event.currentTarget.style.visibility = "hidden";
+                event.currentTarget.src =
+                  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=85";
               }}
             />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-black/10" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
-            <div className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/35 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
+            <div className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/40 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
               <p className="text-[10px] uppercase tracking-[0.2em] text-white">
                 The LUXORA edit
               </p>
@@ -201,9 +203,7 @@ export default function Home() {
             </p>
             <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
               Pieces to fall
-              <span className="italic text-[#d9bd82]">
-                {" "}in love with.
-              </span>
+              <span className="italic text-[#d9bd82]"> in love with.</span>
             </h2>
           </div>
 
@@ -230,7 +230,7 @@ export default function Home() {
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
                 <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition group-hover:bg-[#d9bd82] group-hover:text-black">
                   <FaArrowRight size={13} />
@@ -256,7 +256,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Editorial feature */}
+      {/* Editorial feature with Portrait of a Woman */}
       <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         <div className="grid overflow-hidden rounded-[28px] border border-[#d9bd82]/20 bg-[#15120d] lg:grid-cols-2">
           <div className="flex flex-col justify-center p-7 sm:p-12 lg:p-16">
@@ -266,15 +266,12 @@ export default function Home() {
 
             <h2 className="mt-5 max-w-lg font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl">
               Not just jewelry.
-              <span className="block italic text-[#d9bd82]">
-                A feeling.
-              </span>
+              <span className="block italic text-[#d9bd82]">A feeling.</span>
             </h2>
 
             <p className="mt-6 max-w-md text-sm leading-7 text-stone-400 sm:text-base">
-              Celebrate who you are with designs that bring a little
-              more beauty to everyday life and make special occasions
-              unforgettable.
+              Celebrate who you are with designs that bring a little more beauty
+              to everyday life and make special occasions unforgettable.
             </p>
 
             <Link
@@ -287,20 +284,18 @@ export default function Home() {
 
           <div className="relative min-h-[350px] overflow-hidden sm:min-h-[480px]">
             <img
-              src="https://images.unsplash.com/photo-1599459183200-59c7687a0270?auto=format&fit=crop&w=1400&q=90"
-              alt="Fine jewelry presented in an elegant editorial composition"
+              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1400&q=85"
+              alt="Portrait of woman styled with luxury jewelry"
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition duration-700 hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
             <div className="absolute bottom-6 left-6 rounded-2xl border border-white/20 bg-black/40 px-5 py-4 backdrop-blur-md sm:bottom-8 sm:left-8">
               <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
                 The art of gifting
               </p>
-              <p className="mt-1 font-serif text-xl">
-                Made to be remembered.
-              </p>
+              <p className="mt-1 font-serif text-xl">Made to be remembered.</p>
             </div>
           </div>
         </div>
@@ -329,9 +324,7 @@ export default function Home() {
               <h3 className="mt-5 text-sm font-semibold text-stone-100">
                 {title}
               </h3>
-              <p className="mt-2 text-xs leading-6 text-stone-400">
-                {text}
-              </p>
+              <p className="mt-2 text-xs leading-6 text-stone-400">{text}</p>
             </div>
           ))}
         </div>
@@ -352,8 +345,7 @@ export default function Home() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-stone-400">
-            Explore the LUXORA collection and discover your next
-            favorite piece.
+            Explore the LUXORA collection and discover your next favorite piece.
           </p>
 
           <Link
