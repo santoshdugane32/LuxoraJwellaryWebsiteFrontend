@@ -1,52 +1,54 @@
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 import GoldRateBox from "../components/GoldRateBox";
+import { Link } from "react-router-dom";
 import {
   FaArrowRight,
   FaGem,
   FaShieldAlt,
   FaUndo,
   FaTruck,
+  FaStar,
 } from "react-icons/fa";
 
 const collections = [
   {
-    eyebrow: "TIMELESS CLASSICS",
-    title: "Diamond Rings",
-    description: "Elegant pieces for life's most precious moments.",
-    image:
-      "https://headiamonds.com/images/hero/hea-diamonds-hero.png",
+    eyebrow: "MADE TO BE ADMIRED",
+    title: "Statement Rings",
+    description: "Little details. Extraordinary presence.",
     category: "Rings",
+    image:
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    eyebrow: "EVERYDAY LUXURY",
-    title: "Gold Necklaces",
-    description: "Understated beauty, crafted to be treasured.",
-    image:
-      "https://www.jewar1974.com/hero-jewellery.jpg",
+    eyebrow: "GOLDEN MOMENTS",
+    title: "Necklaces",
+    description: "A graceful touch for every occasion.",
     category: "Necklaces",
+    image:
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=85",
   },
   {
-    eyebrow: "THE FINISHING TOUCH",
-    title: "Fine Earrings",
-    description: "A little brilliance for every occasion.",
-    image:
-      "https://agcojewellery.com/cdn/shop/files/AdobeStock_1059905582.jpg?v=1741326990&width=2000",
+    eyebrow: "THE PERFECT FINISH",
+    title: "Earrings",
+    description: "Designed to make every moment shine.",
     category: "Earrings",
+    image:
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=85",
   },
 ];
 
 const benefits = [
   {
     icon: FaGem,
-    title: "Quality Craftsmanship",
-    text: "Carefully selected designs",
+    title: "Thoughtful Craftsmanship",
+    text: "Designs chosen with care",
   },
   {
     icon: FaShieldAlt,
-    title: "Secure Checkout",
-    text: "Protected online payments",
+    title: "Secure Payments",
+    text: "Protected online checkout",
   },
   {
     icon: FaUndo,
@@ -62,54 +64,58 @@ const benefits = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-hidden bg-[#080806] text-[#f7f0e4]">
+    <div className="min-h-screen overflow-hidden bg-[#0b0a08] text-[#f8f2e8]">
       <Navbar />
 
-      <div className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
-        <GoldRateBox />
+      {/* Gold rate panel */}
+      <div className="mx-auto max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-2xl border border-[#d6b779]/20 bg-gradient-to-r from-[#17140f] via-[#100f0c] to-[#19150e] p-1 shadow-[0_12px_50px_rgba(0,0,0,0.22)]">
+          <GoldRateBox />
+        </div>
       </div>
 
-      {/* Hero section */}
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-12 lg:px-10">
+      {/* Hero */}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-12 sm:px-8 sm:pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:px-10 lg:pb-24">
         <div className="relative z-10">
-          <p className="mb-6 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.3em] text-[#d5b878] sm:text-xs">
-            <span className="h-px w-9 bg-[#d5b878]" />
-            Made for your moments
-          </p>
-
-          <h1 className="font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl md:text-7xl xl:text-[78px]">
-            The art of
-            <span className="block italic text-[#d9bd82]">
-              timeless
+          <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-[#d9bd82]/25 bg-[#d9bd82]/5 px-4 py-2">
+            <FaStar className="text-xs text-[#dfc38a]" />
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#e6d0a1]">
+              Jewelry for your story
             </span>
-            elegance.
+          </div>
+
+          <h1 className="max-w-xl font-serif text-5xl leading-[1.08] tracking-tight sm:text-6xl md:text-7xl xl:text-[82px]">
+            Wear your
+            <span className="block italic text-[#d9bd82]">
+              own kind
+            </span>
+            of beautiful.
           </h1>
 
-          <p className="mt-6 max-w-lg text-base leading-7 text-stone-400 sm:text-lg sm:leading-8">
-            Discover thoughtfully curated jewelry that celebrates
-            your individuality. From everyday elegance to life's
-            unforgettable occasions.
+          <p className="mt-7 max-w-lg text-base leading-8 text-stone-400 sm:text-lg">
+            Discover jewelry that feels like you. From everyday
+            favorites to unforgettable statement pieces, find the
+            little details that make every moment special.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-9 flex flex-wrap gap-4">
             <Link
               to="/products"
-              className="inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-7 py-4 text-sm font-semibold text-[#17120a] transition hover:bg-[#eed9a7]"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-7 py-4 text-sm font-semibold text-[#17120a] shadow-lg shadow-[#d9bd82]/10 transition duration-300 hover:-translate-y-1 hover:bg-[#ead5a5]"
             >
-              Explore Collection
-              <FaArrowRight size={13} />
+              Explore the collection
+              <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </Link>
 
             <Link
               to="/products"
-              className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 text-sm text-stone-200 transition hover:border-[#d9bd82] hover:text-[#d9bd82]"
+              className="inline-flex items-center gap-3 rounded-full border border-white/15 px-7 py-4 text-sm text-stone-200 transition hover:border-[#d9bd82]/70 hover:text-[#e5ca91]"
             >
               Discover LUXORA
-              <FaArrowRight size={13} />
             </Link>
           </div>
 
-          <div className="mt-10 grid max-w-lg grid-cols-3 border-t border-white/10 pt-6">
+          <div className="mt-12 grid max-w-lg grid-cols-3 border-t border-white/10 pt-7">
             <div className="pr-3">
               <p className="font-serif text-2xl text-[#e3ca95] sm:text-3xl">
                 24K
@@ -124,13 +130,13 @@ export default function Home() {
                 Fine
               </p>
               <p className="mt-2 text-xs leading-5 text-stone-500">
-                Curated designs
+                Curated jewelry
               </p>
             </div>
 
             <div className="border-l border-white/10 pl-4">
               <p className="font-serif text-2xl text-[#e3ca95] sm:text-3xl">
-                Secure
+                Safe
               </p>
               <p className="mt-2 text-xs leading-5 text-stone-500">
                 Online checkout
@@ -139,184 +145,238 @@ export default function Home() {
           </div>
         </div>
 
-        {/* New hero image */}
+        {/* Lifestyle hero image */}
         <div className="relative mx-auto w-full max-w-2xl">
-          <div className="absolute -inset-5 rounded-full bg-[#a47735]/15 blur-3xl" />
+          <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/10 blur-3xl" />
 
-          <div className="relative overflow-hidden rounded-t-[42%] rounded-b-2xl border border-[#d9bd82]/25">
+          <div className="relative overflow-hidden rounded-[30px] border border-[#d9bd82]/20 bg-[#17130e]">
             <img
-              src="https://cdn.pixla.ai/storage/v1/object/public/images/1b851341-68b9-4c1a-a93e-3179845501ba/ai-influencer/1782659150147-c4b33fa2-jewelry-try-on-Necklaces-Pendants.png"
-              alt="Gold pendant necklace against black velvet"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=90"
+              alt="Fashion portrait for the LUXORA jewelry collection"
               fetchPriority="high"
-              className="h-[420px] w-full object-cover object-center sm:h-[540px] lg:h-[600px]"
+              className="h-[430px] w-full object-cover object-center sm:h-[560px] lg:h-[650px]"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-black/10" />
 
-            <div className="absolute bottom-6 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-8 sm:left-8 sm:right-8">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.25em] text-[#e5c98d]">
-                  The signature edit
-                </p>
-                <h2 className="mt-2 font-serif text-2xl sm:text-3xl">
-                  Beauty in every detail
-                </h2>
-              </div>
-
-              <Link
-                to="/products"
-                aria-label="Explore the jewelry collection"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/40 bg-black/30 transition hover:bg-[#d9bd82] hover:text-black"
-              >
-                <FaArrowRight size={14} />
-              </Link>
+            <div className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/30 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-white">
+                The LUXORA edit
+              </p>
             </div>
+
+            <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/15 bg-black/40 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-[#e3c98f]">
+                Made for your moments
+              </p>
+
+              <div className="mt-3 flex items-end justify-between gap-4">
+                <div>
+                  <h2 className="font-serif text-2xl sm:text-3xl">
+                    Your moment.
+                    <span className="block italic text-[#e2c487]">
+                      Your sparkle.
+                    </span>
+                  </h2>
+                  <p className="mt-2 text-sm text-stone-300">
+                    Find the piece that feels like you.
+                  </p>
+                </div>
+
+                <Link
+                  to="/products"
+                  aria-label="Explore LUXORA jewelry"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d9bd82] text-black transition hover:scale-105 hover:bg-[#eed9a7]"
+                >
+                  <FaArrowRight />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute -bottom-5 -left-3 hidden rounded-2xl border border-[#d9bd82]/25 bg-[#14110d] px-5 py-4 shadow-xl sm:block md:-left-7">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-stone-500">
+              A little luxury
+            </p>
+            <p className="mt-1 font-serif text-lg text-[#e3ca95]">
+              Every single day.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Collections */}
-      <section className="mx-auto max-w-7xl px-5 pb-14 pt-16 sm:px-8 lg:px-10">
-        <div className="flex flex-col justify-between gap-5 border-b border-white/10 pb-7 sm:flex-row sm:items-end">
+      {/* Collection intro */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 pt-10 sm:px-8 lg:px-10">
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-[#d5b878]">
-              Find your signature
+            <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
+              Find what speaks to you
             </p>
-            <h2 className="mt-3 font-serif text-4xl sm:text-5xl">
-              Explore our collections
+            <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
+              Pieces to fall
+              <span className="italic text-[#d9bd82]"> in love with.</span>
             </h2>
           </div>
 
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 text-sm text-[#d9bd82] transition hover:text-white"
+            className="inline-flex w-fit items-center gap-2 border-b border-[#d9bd82]/50 pb-2 text-sm text-[#e4ca94] transition hover:border-white hover:text-white"
           >
-            View all jewelry <FaArrowRight size={12} />
+            Explore all jewelry <FaArrowRight size={12} />
           </Link>
         </div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {collections.map((item) => (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {collections.map((item, index) => (
             <Link
               to="/products"
               key={item.title}
-              className="group relative isolate overflow-hidden border border-[#d9bd82]/20 bg-[#100f0c]"
+              className="group relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#13110e] transition duration-500 hover:-translate-y-1 hover:border-[#d9bd82]/40"
             >
-              <div className="relative h-[360px] overflow-hidden sm:h-[420px]">
+              <div className="relative h-[350px] overflow-hidden sm:h-[400px]">
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/5" />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/5" />
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-[#e3ca95]">
-                  {item.eyebrow}
-                </p>
-
-                <h3 className="mt-3 font-serif text-3xl">
-                  {item.title}
-                </h3>
-
-                <p className="mt-2 max-w-xs text-sm leading-6 text-stone-300">
-                  {item.description}
-                </p>
-
-                <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#e3ca95]">
-                  Explore collection
-                  <FaArrowRight size={11} />
+                <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition group-hover:bg-[#d9bd82] group-hover:text-black">
+                  <FaArrowRight size={13} />
                 </span>
+
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
+                  <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
+                    {item.eyebrow}
+                  </p>
+
+                  <h3 className="mt-3 font-serif text-3xl sm:text-4xl">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm text-stone-300">
+                    {item.description}
+                  </p>
+
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#e3ca95]">
+                    Discover pieces <FaArrowRight size={11} />
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Editorial banner */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-        <div className="grid overflow-hidden border border-[#c5a366]/20 bg-[#100e0a] md:grid-cols-2">
-          <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
-            <p className="text-xs uppercase tracking-[0.25em] text-[#d5b878]">
-              A little more extraordinary
+      {/* Editorial feature */}
+      <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
+        <div className="grid overflow-hidden rounded-[30px] border border-[#d9bd82]/20 bg-[#15120d] lg:grid-cols-2">
+          <div className="flex flex-col justify-center p-7 sm:p-12 lg:p-16">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
+              Beyond the ordinary
             </p>
 
-            <h2 className="mt-5 max-w-md font-serif text-4xl leading-tight sm:text-5xl">
-              Jewelry that feels
+            <h2 className="mt-5 max-w-lg font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl">
+              Not just jewelry.
               <span className="block italic text-[#d9bd82]">
-                uniquely yours.
+                A feeling.
               </span>
             </h2>
 
-            <p className="mt-5 max-w-md text-sm leading-7 text-stone-400">
-              Find meaningful pieces for celebrations, thoughtful
-              gifts, and the moments you want to remember forever.
+            <p className="mt-6 max-w-md text-sm leading-7 text-stone-400 sm:text-base">
+              Celebrate the person you are and the moments that
+              make you who you are. Discover designs that turn
+              everyday outfits into something memorable.
             </p>
 
             <Link
               to="/products"
-              className="mt-8 inline-flex w-fit items-center gap-3 border-b border-[#d9bd82]/60 pb-2 text-sm text-[#e3ca95] transition hover:border-white hover:text-white"
+              className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-[#d9bd82]/50 px-6 py-3.5 text-sm text-[#e5cb96] transition hover:bg-[#d9bd82] hover:text-black"
             >
-              Find your piece <FaArrowRight size={12} />
+              Find your signature piece <FaArrowRight size={12} />
             </Link>
           </div>
 
-          <div className="min-h-[300px] overflow-hidden sm:min-h-[400px]">
+          <div className="relative min-h-[350px] overflow-hidden sm:min-h-[480px]">
             <img
-              src="https://foreverforlove.com/cdn/shop/files/ring1.jpg?v=1771322580&width=2400"
-              alt="Diamond jewelry photographed against a luxurious dark background"
+              src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1200&q=85"
+              alt="Elegant jewelry detail"
               loading="lazy"
-              className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:min-h-[400px]"
+              className="absolute inset-0 h-full w-full object-cover transition duration-700 hover:scale-105"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            <div className="absolute bottom-6 left-6 rounded-2xl border border-white/20 bg-black/35 px-5 py-4 backdrop-blur-md sm:bottom-8 sm:left-8">
+              <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
+                The art of gifting
+              </p>
+              <p className="mt-1 font-serif text-xl">
+                Made to be remembered.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Benefits */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-y border-white/10 py-9 md:grid-cols-4">
-          {benefits.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="flex items-start gap-3 sm:gap-4">
-              <Icon
-                className="mt-1 shrink-0 text-[#d9bd82]"
-                size={22}
-              />
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+        <div className="mb-8 text-center">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
+            The LUXORA promise
+          </p>
+          <h2 className="mt-3 font-serif text-3xl sm:text-4xl">
+            A better way to shop jewelry.
+          </h2>
+        </div>
 
-              <div>
-                <h3 className="text-sm font-medium text-stone-100">
-                  {title}
-                </h3>
-                <p className="mt-2 text-xs leading-5 text-stone-500">
-                  {text}
-                </p>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {benefits.map(({ icon: Icon, title, text }) => (
+            <div
+              key={title}
+              className="rounded-2xl border border-white/[0.08] bg-gradient-to-br from-[#17140f] to-[#100f0c] p-6 transition duration-300 hover:border-[#d9bd82]/35"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#d9bd82]/25 bg-[#d9bd82]/10">
+                <Icon className="text-[#d9bd82]" size={19} />
               </div>
+
+              <h3 className="mt-5 text-sm font-semibold text-stone-100">
+                {title}
+              </h3>
+              <p className="mt-2 text-xs leading-6 text-stone-400">
+                {text}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Final call to action */}
-      <section className="px-5 py-16 text-center sm:px-8 sm:py-24">
-        <p className="text-xs uppercase tracking-[0.3em] text-[#d5b878]">
-          The LUXORA experience
-        </p>
+      {/* Final CTA */}
+      <section className="px-5 pb-20 pt-10 text-center sm:px-8 sm:pb-28">
+        <div className="mx-auto max-w-4xl rounded-[30px] border border-[#d9bd82]/20 bg-[radial-gradient(ellipse_at_top,rgba(166,123,49,0.13),transparent_65%)] px-6 py-14 sm:px-12 sm:py-20">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
+            Your story deserves to shine
+          </p>
 
-        <h2 className="mx-auto mt-5 max-w-3xl font-serif text-4xl leading-tight sm:text-6xl">
-          Make every moment
-          <span className="block italic text-[#d9bd82]">
-            unforgettable.
-          </span>
-        </h2>
+          <h2 className="mx-auto mt-5 max-w-3xl font-serif text-4xl leading-tight sm:text-6xl">
+            Find the piece that
+            <span className="block italic text-[#d9bd82]">
+              feels like forever.
+            </span>
+          </h2>
 
-        <Link
-          to="/products"
-          className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-8 py-4 text-sm font-semibold text-[#17120a] transition hover:bg-[#eed9a7]"
-        >
-          Shop the collection <FaArrowRight size={13} />
-        </Link>
+          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-stone-400">
+            Explore the LUXORA collection and discover your next
+            favorite piece.
+          </p>
+
+          <Link
+            to="/products"
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-8 py-4 text-sm font-semibold text-[#17120a] transition hover:-translate-y-1 hover:bg-[#eed9a7]"
+          >
+            Shop LUXORA <FaArrowRight size={13} />
+          </Link>
+        </div>
       </section>
 
       <Footer />
