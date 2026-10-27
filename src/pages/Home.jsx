@@ -16,25 +16,25 @@ const collections = [
     eyebrow: "MADE TO BE ADMIRED",
     title: "Statement Rings",
     description: "Little details. Extraordinary presence.",
-    // Tanishq-style: Indian bride adorned with intricate statement rings & haathphool
+    // Fancy luxury solitaire diamond & gold ring on dark studio reflective backdrop
     image:
-      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "GOLDEN MOMENTS",
     title: "Gold Necklaces",
     description: "Graceful designs made to be treasured.",
-    // Tanishq-style: Traditional royal gold choker necklace on bride
+    // Ultra-fancy diamond & gold pendant necklace glowing on dark moody background
     image:
-      "https://images.unsplash.com/photo-1546804784-896d0dca3805?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "THE PERFECT FINISH",
     title: "Fine Earrings",
     description: "A little brilliance for every occasion.",
-    // Tanishq-style: Regal Indian jhumkas & traditional gold earrings
+    // Luxury diamond chandelier / drop earrings styled with warm golden contrast
     image:
-      "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1200&q=85",
   },
 ];
 
@@ -142,43 +142,44 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero Image — Tanishq-style royal Indian bride portrait */}
+        {/* Hero Image — Exact GoldenHue model style (Woman in off-shoulder black gown with diamond necklace & earrings) */}
         <div className="relative mx-auto w-full max-w-2xl">
           <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/20 blur-3xl" />
 
           <div className="relative overflow-hidden rounded-[28px] border border-[#d9bd82]/25 bg-[#17130e]">
             <img
-              src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1400&q=85"
-              alt="Tanishq style royal Indian bride adorned in traditional 22K gold & Kundan jewellery"
+              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1400&q=85"
+              alt="Luxury diamond jewelry necklace and earrings worn by high fashion woman model"
               fetchPriority="high"
-              className="h-[480px] w-full object-cover object-center sm:h-[580px] lg:h-[660px]"
+              className="h-[480px] w-full object-cover object-top sm:h-[580px] lg:h-[660px]"
               onError={(event) => {
                 event.currentTarget.src =
-                  "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1400&q=85";
+                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85";
               }}
             />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
-            <div className="absolute left-5 top-5 rounded-full border border-[#d9bd82]/40 bg-black/60 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
+            {/* Top pill badge like in GoldenHue */}
+            <div className="absolute left-5 top-5 rounded-full border border-[#d9bd82]/30 bg-black/60 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
               <p className="text-[10px] uppercase tracking-[0.2em] text-[#eed9a7]">
-                The Royal Trousseau
+                NEW COLLECTION
               </p>
             </div>
 
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 rounded-2xl border border-white/15 bg-black/65 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[#e3c98f]">
-                  Timeless Indian Heritage
+                  18K White Gold Finish
                 </p>
                 <h2 className="mt-2 font-serif text-2xl sm:text-3xl">
-                  Rivaah Edit.
+                  Timeless Elegance.
                   <span className="block italic text-[#e2c487]">
-                    Crafted in 22K Gold.
+                    Diamond Brilliance.
                   </span>
                 </h2>
                 <p className="mt-1 text-sm text-stone-300">
-                  Every heirloom holds an eternal promise.
+                  Experience the sparkle that lasts forever.
                 </p>
               </div>
 
@@ -194,7 +195,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Collections */}
+      {/* Collections — 3 Modern Fancy Cards */}
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:px-10">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
@@ -256,48 +257,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Editorial feature — Tanishq Wedding & Heritage campaign banner */}
+      {/* Editorial feature */}
       <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         <div className="grid overflow-hidden rounded-[28px] border border-[#d9bd82]/20 bg-[#15120d] lg:grid-cols-2">
           <div className="flex flex-col justify-center p-7 sm:p-12 lg:p-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
-              Heritage & Royalty
+              Beyond the ordinary
             </p>
 
             <h2 className="mt-5 max-w-lg font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl">
-              Rooted in tradition.
-              <span className="block italic text-[#d9bd82]">
-                Celebrated forever.
-              </span>
+              Not just jewelry.
+              <span className="block italic text-[#d9bd82]">A feeling.</span>
             </h2>
 
             <p className="mt-6 max-w-md text-sm leading-7 text-stone-400 sm:text-base">
-              Crafted with purity and timeless grandeur. From wedding celebrations
-              to everyday elegance, discover pieces shaped with the soul of Indian artistry.
+              Celebrate who you are with designs that bring a little more beauty
+              to everyday life and make special occasions unforgettable.
             </p>
 
             <Link
               to="/products"
               className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-[#d9bd82]/50 px-6 py-3.5 text-sm text-[#e5cb96] transition hover:bg-[#d9bd82] hover:text-black"
             >
-              Explore Bridal Heritage <FaArrowRight size={12} />
+              Find your signature piece <FaArrowRight size={12} />
             </Link>
           </div>
 
           <div className="relative min-h-[380px] overflow-hidden sm:min-h-[480px]">
             <img
-              src="https://images.unsplash.com/photo-1610030469850-c8e43e7c8ecf?auto=format&fit=crop&w=1400&q=85"
-              alt="Indian woman wearing royal bridal gold jewellery and traditional saree"
+              src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1400&q=85"
+              alt="Editorial bridal diamonds and luxury necklace set"
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
             <div className="absolute bottom-6 left-6 rounded-2xl border border-white/20 bg-black/50 px-5 py-4 backdrop-blur-md sm:bottom-8 sm:left-8">
               <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
-                Utsav & Wedding Edition
+                Bridal Edition
               </p>
-              <p className="mt-1 font-serif text-xl">The Gold Standard of Elegance.</p>
+              <p className="mt-1 font-serif text-xl">
+                Exclusive Bridal Jewelry
+              </p>
             </div>
           </div>
         </div>
