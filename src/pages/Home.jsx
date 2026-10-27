@@ -141,19 +141,22 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Woman wearing jewelry — hero image */}
+        {/* Luxury jewelry hero image — no portrait */}
         <div className="relative mx-auto w-full max-w-2xl">
           <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/15 blur-3xl" />
 
           <div className="relative overflow-hidden rounded-[28px] border border-[#d9bd82]/25 bg-[#17130e]">
             <img
-              src="https://images.pexels.com/photos/14261991/pexels-photo-14261991.jpeg?auto=compress&cs=tinysrgb&w=1400"
-              alt="Indian woman wearing elegant gold jewelry"
+              src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1400&q=90"
+              alt="Elegant gold jewelry styled for a luxury editorial"
               fetchPriority="high"
               className="h-[470px] w-full object-cover object-center sm:h-[580px] lg:h-[660px]"
+              onError={(event) => {
+                event.currentTarget.style.visibility = "hidden";
+              }}
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-black/10" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-black/10" />
 
             <div className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/35 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
               <p className="text-[10px] uppercase tracking-[0.2em] text-white">
@@ -161,7 +164,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 rounded-2xl border border-white/15 bg-black/40 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
+            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[#e3c98f]">
                   Made for your moments
@@ -284,8 +287,8 @@ export default function Home() {
 
           <div className="relative min-h-[350px] overflow-hidden sm:min-h-[480px]">
             <img
-              src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1400&q=90"
-              alt="Luxury jewelry styled for an editorial campaign"
+              src="https://images.unsplash.com/photo-1599459183200-59c7687a0270?auto=format&fit=crop&w=1400&q=90"
+              alt="Fine jewelry presented in an elegant editorial composition"
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition duration-700 hover:scale-105"
             />
