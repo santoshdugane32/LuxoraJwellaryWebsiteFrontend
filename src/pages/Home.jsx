@@ -17,24 +17,21 @@ const collections = [
     eyebrow: "TIMELESS CLASSICS",
     title: "Diamond Rings",
     description: "Elegant pieces for life's most precious moments.",
-    image:
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=1000&auto=format&fit=crop",
+    position: "left center",
     category: "Rings",
   },
   {
     eyebrow: "EVERYDAY LUXURY",
     title: "Gold Necklaces",
     description: "Understated beauty, crafted to be treasured.",
-    image:
-      "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=1000&auto=format&fit=crop",
+    position: "center center",
     category: "Necklaces",
   },
   {
     eyebrow: "THE FINISHING TOUCH",
     title: "Fine Earrings",
     description: "A little brilliance for every occasion.",
-    image:
-      "https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=1000&auto=format&fit=crop",
+    position: "right center",
     category: "Earrings",
   },
 ];
@@ -72,32 +69,32 @@ export default function Home() {
         <GoldRateBox />
       </div>
 
-      {/* Hero */}
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-10">
+      {/* Hero section */}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-12 lg:px-10">
         <div className="relative z-10">
-          <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-[#d5b878]">
+          <p className="mb-6 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.3em] text-[#d5b878] sm:text-xs">
             <span className="h-px w-9 bg-[#d5b878]" />
             Made for your moments
           </p>
 
-          <h1 className="font-serif text-5xl leading-[1.08] tracking-tight sm:text-6xl md:text-7xl xl:text-[82px]">
+          <h1 className="font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl md:text-7xl xl:text-[78px]">
             The art of
-            <span className="mt-1 block italic text-[#d9bd82]">
+            <span className="block italic text-[#d9bd82]">
               timeless
             </span>
             elegance.
           </h1>
 
-          <p className="mt-7 max-w-lg text-base leading-8 text-stone-400 sm:text-lg">
+          <p className="mt-6 max-w-lg text-base leading-7 text-stone-400 sm:text-lg sm:leading-8">
             Discover thoughtfully curated jewelry that celebrates
             your individuality. From everyday elegance to life's
             unforgettable occasions.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               to="/products"
-              className="inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-7 py-3.5 text-sm font-semibold text-[#17120a] transition hover:bg-[#eed9a7]"
+              className="inline-flex items-center gap-3 rounded-full bg-[#d9bd82] px-7 py-4 text-sm font-semibold text-[#17120a] transition hover:bg-[#eed9a7]"
             >
               Explore Collection
               <FaArrowRight size={13} />
@@ -105,14 +102,14 @@ export default function Home() {
 
             <Link
               to="/products"
-              className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 text-sm text-stone-200 transition hover:border-[#d9bd82] hover:text-[#d9bd82]"
+              className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 text-sm text-stone-200 transition hover:border-[#d9bd82] hover:text-[#d9bd82]"
             >
               Discover LUXORA
               <FaPlay size={10} />
             </Link>
           </div>
 
-          <div className="mt-12 grid max-w-md grid-cols-3 border-t border-white/10 pt-6">
+          <div className="mt-10 grid max-w-lg grid-cols-3 border-t border-white/10 pt-6">
             <div className="pr-3">
               <p className="font-serif text-2xl text-[#e3ca95] sm:text-3xl">
                 24K
@@ -142,21 +139,21 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero image */}
-        <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="absolute -inset-4 rounded-[45%] bg-[#a47735]/10 blur-3xl" />
+        {/* Hero jewelry image */}
+        <div className="relative mx-auto w-full max-w-2xl">
+          <div className="absolute -inset-3 rounded-[45%] bg-[#a47735]/10 blur-3xl" />
 
-          <div className="relative overflow-hidden rounded-t-[48%] rounded-b-2xl border border-[#d9bd82]/20">
+          <div className="relative overflow-hidden rounded-t-[45%] rounded-b-2xl border border-[#d9bd82]/25">
             <img
-              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1400&auto=format&fit=crop"
-              alt="Elegant gold jewelry collection"
-              className="h-[430px] w-full object-cover sm:h-[560px] lg:h-[650px]"
+              src="/images/luxora-hero.png"
+              alt="Luxury gold and diamond pendant"
               fetchPriority="high"
+              className="h-[400px] w-full object-cover object-center sm:h-[540px] lg:h-[620px]"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/5" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5" />
 
-            <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 sm:bottom-8 sm:left-8 sm:right-8">
+            <div className="absolute bottom-6 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-8 sm:left-8 sm:right-8">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[#e5c98d]">
                   The signature edit
@@ -175,20 +172,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-          <div className="absolute -bottom-4 -left-2 border border-[#d9bd82]/30 bg-[#11100d]/95 px-4 py-3 sm:-left-6 sm:px-6 sm:py-4">
-            <p className="text-[9px] uppercase tracking-[0.2em] text-stone-400">
-              Designed to be treasured
-            </p>
-            <p className="mt-1 font-serif text-lg text-[#e3ca95]">
-              Your story. Your sparkle.
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* Collection introduction */}
-      <section className="mx-auto max-w-7xl px-5 pb-12 pt-16 sm:px-8 lg:px-10">
+      {/* Collections */}
+      <section className="mx-auto max-w-7xl px-5 pb-14 pt-16 sm:px-8 lg:px-10">
         <div className="flex flex-col justify-between gap-5 border-b border-white/10 pb-7 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-[#d5b878]">
@@ -212,18 +200,25 @@ export default function Home() {
             <Link
               to="/products"
               key={item.title}
-              className="group relative overflow-hidden border border-white/10 bg-[#100f0c]"
+              className="group relative isolate overflow-hidden border border-[#d9bd82]/20 bg-[#100f0c]"
             >
-              <div className="overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="h-[330px] w-full object-cover transition duration-700 group-hover:scale-105 sm:h-[400px]"
+              {/* Each card displays a different panel of the triptych */}
+              <div className="relative h-[330px] overflow-hidden sm:h-[400px]">
+                <div
+                  role="img"
+                  aria-label={item.title}
+                  className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105"
+                  style={{
+                    backgroundImage:
+                      "url('/images/luxora-collections.png')",
+                    backgroundSize: "300% 100%",
+                    backgroundPosition: item.position,
+                    backgroundRepeat: "no-repeat",
+                  }}
                 />
-              </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/5" />
+              </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-[#e3ca95]">
@@ -239,7 +234,8 @@ export default function Home() {
                 </p>
 
                 <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#e3ca95]">
-                  Explore collection <FaArrowRight size={11} />
+                  Explore collection
+                  <FaArrowRight size={11} />
                 </span>
               </div>
             </Link>
@@ -249,7 +245,7 @@ export default function Home() {
 
       {/* Editorial banner */}
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-        <div className="relative grid overflow-hidden border border-[#c5a366]/20 bg-[#100e0a] md:grid-cols-2">
+        <div className="grid overflow-hidden border border-[#c5a366]/20 bg-[#100e0a] md:grid-cols-2">
           <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
             <p className="text-xs uppercase tracking-[0.25em] text-[#d5b878]">
               A little more extraordinary
@@ -277,10 +273,14 @@ export default function Home() {
 
           <div className="min-h-[300px] overflow-hidden sm:min-h-[400px]">
             <img
-              src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1200&auto=format&fit=crop"
+              src="/images/luxora-editorial.png"
               alt="Fine jewelry styled for a special occasion"
               loading="lazy"
-              className="h-full min-h-[300px] w-full object-cover transition duration-700 hover:scale-105 sm:min-h-[400px]"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                event.currentTarget.src = "/images/luxora-hero.png";
+              }}
+              className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:min-h-[400px]"
             />
           </div>
         </div>
@@ -291,7 +291,10 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-y border-white/10 py-9 md:grid-cols-4">
           {benefits.map(({ icon: Icon, title, text }) => (
             <div key={title} className="flex items-start gap-3 sm:gap-4">
-              <Icon className="mt-1 shrink-0 text-[#d9bd82]" size={22} />
+              <Icon
+                className="mt-1 shrink-0 text-[#d9bd82]"
+                size={22}
+              />
 
               <div>
                 <h3 className="text-sm font-medium text-stone-100">
@@ -306,7 +309,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to action */}
+      {/* Final call to action */}
       <section className="px-5 py-16 text-center sm:px-8 sm:py-24">
         <p className="text-xs uppercase tracking-[0.3em] text-[#d5b878]">
           The LUXORA experience
