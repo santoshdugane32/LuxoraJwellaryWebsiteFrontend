@@ -16,25 +16,25 @@ const collections = [
     eyebrow: "MADE TO BE ADMIRED",
     title: "Statement Rings",
     description: "Little details. Extraordinary presence.",
-    // Woman's hand gracefully showcasing luxury diamond & gold rings
+    // Tanishq-style: Indian bride adorned with intricate statement rings & haathphool
     image:
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "GOLDEN MOMENTS",
     title: "Gold Necklaces",
     description: "Graceful designs made to be treasured.",
-    // Elegant woman wearing layered luxury gold necklace
+    // Tanishq-style: Traditional royal gold choker necklace on bride
     image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1546804784-896d0dca3805?auto=format&fit=crop&w=1200&q=85",
   },
   {
     eyebrow: "THE PERFECT FINISH",
     title: "Fine Earrings",
     description: "A little brilliance for every occasion.",
-    // High-fashion woman wearing sparkling drop earrings
+    // Tanishq-style: Regal Indian jhumkas & traditional gold earrings
     image:
-      "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=85",
   },
 ];
 
@@ -142,43 +142,43 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Luxury Hero Image with Editorial Woman Portrait */}
+        {/* Hero Image — Tanishq-style royal Indian bride portrait */}
         <div className="relative mx-auto w-full max-w-2xl">
-          <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/15 blur-3xl" />
+          <div className="absolute -inset-5 rounded-[40px] bg-[#a47735]/20 blur-3xl" />
 
           <div className="relative overflow-hidden rounded-[28px] border border-[#d9bd82]/25 bg-[#17130e]">
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85"
-              alt="Editorial portrait of an elegant woman wearing luxury gold and diamond jewelry"
+              src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1400&q=85"
+              alt="Tanishq style royal Indian bride adorned in traditional 22K gold & Kundan jewellery"
               fetchPriority="high"
-              className="h-[470px] w-full object-cover object-top sm:h-[580px] lg:h-[660px]"
+              className="h-[480px] w-full object-cover object-center sm:h-[580px] lg:h-[660px]"
               onError={(event) => {
                 event.currentTarget.src =
-                  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=85";
+                  "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1400&q=85";
               }}
             />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-            <div className="absolute left-5 top-5 rounded-full border border-white/25 bg-black/40 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-white">
-                The LUXORA edit
+            <div className="absolute left-5 top-5 rounded-full border border-[#d9bd82]/40 bg-black/60 px-4 py-2 backdrop-blur-md sm:left-7 sm:top-7">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#eed9a7]">
+                The Royal Trousseau
               </p>
             </div>
 
-            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
+            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 rounded-2xl border border-white/15 bg-black/65 p-5 backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-7 sm:p-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[#e3c98f]">
-                  Made for your moments
+                  Timeless Indian Heritage
                 </p>
-                <h2 className="mt-3 font-serif text-2xl sm:text-3xl">
-                  Your moment.
+                <h2 className="mt-2 font-serif text-2xl sm:text-3xl">
+                  Rivaah Edit.
                   <span className="block italic text-[#e2c487]">
-                    Your sparkle.
+                    Crafted in 22K Gold.
                   </span>
                 </h2>
-                <p className="mt-2 text-sm text-stone-300">
-                  Find the piece that feels like you.
+                <p className="mt-1 text-sm text-stone-300">
+                  Every heirloom holds an eternal promise.
                 </p>
               </div>
 
@@ -222,7 +222,7 @@ export default function Home() {
               key={item.title}
               className="group relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#13110e] transition duration-500 hover:-translate-y-1 hover:border-[#d9bd82]/40"
             >
-              <div className="relative h-[350px] overflow-hidden sm:h-[410px]">
+              <div className="relative h-[360px] overflow-hidden sm:h-[420px]">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -230,9 +230,9 @@ export default function Home() {
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
 
-                <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition group-hover:bg-[#d9bd82] group-hover:text-black">
+                <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition group-hover:bg-[#d9bd82] group-hover:text-black">
                   <FaArrowRight size={13} />
                 </span>
 
@@ -240,13 +240,13 @@ export default function Home() {
                   <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
                     {item.eyebrow}
                   </p>
-                  <h3 className="mt-3 font-serif text-3xl sm:text-4xl">
+                  <h3 className="mt-2 font-serif text-3xl sm:text-4xl">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm text-stone-300">
+                  <p className="mt-2 text-sm text-stone-300">
                     {item.description}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#e3ca95]">
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm text-[#e3ca95]">
                     Discover pieces <FaArrowRight size={11} />
                   </span>
                 </div>
@@ -256,46 +256,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Editorial feature with Portrait of a Woman */}
+      {/* Editorial feature — Tanishq Wedding & Heritage campaign banner */}
       <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         <div className="grid overflow-hidden rounded-[28px] border border-[#d9bd82]/20 bg-[#15120d] lg:grid-cols-2">
           <div className="flex flex-col justify-center p-7 sm:p-12 lg:p-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#d9bd82]">
-              Beyond the ordinary
+              Heritage & Royalty
             </p>
 
             <h2 className="mt-5 max-w-lg font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl">
-              Not just jewelry.
-              <span className="block italic text-[#d9bd82]">A feeling.</span>
+              Rooted in tradition.
+              <span className="block italic text-[#d9bd82]">
+                Celebrated forever.
+              </span>
             </h2>
 
             <p className="mt-6 max-w-md text-sm leading-7 text-stone-400 sm:text-base">
-              Celebrate who you are with designs that bring a little more beauty
-              to everyday life and make special occasions unforgettable.
+              Crafted with purity and timeless grandeur. From wedding celebrations
+              to everyday elegance, discover pieces shaped with the soul of Indian artistry.
             </p>
 
             <Link
               to="/products"
               className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-[#d9bd82]/50 px-6 py-3.5 text-sm text-[#e5cb96] transition hover:bg-[#d9bd82] hover:text-black"
             >
-              Find your signature piece <FaArrowRight size={12} />
+              Explore Bridal Heritage <FaArrowRight size={12} />
             </Link>
           </div>
 
-          <div className="relative min-h-[350px] overflow-hidden sm:min-h-[480px]">
+          <div className="relative min-h-[380px] overflow-hidden sm:min-h-[480px]">
             <img
-              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1400&q=85"
-              alt="Portrait of woman styled with luxury jewelry"
+              src="https://images.unsplash.com/photo-1610030469850-c8e43e7c8ecf?auto=format&fit=crop&w=1400&q=85"
+              alt="Indian woman wearing royal bridal gold jewellery and traditional saree"
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
-            <div className="absolute bottom-6 left-6 rounded-2xl border border-white/20 bg-black/40 px-5 py-4 backdrop-blur-md sm:bottom-8 sm:left-8">
+            <div className="absolute bottom-6 left-6 rounded-2xl border border-white/20 bg-black/50 px-5 py-4 backdrop-blur-md sm:bottom-8 sm:left-8">
               <p className="text-[9px] uppercase tracking-[0.25em] text-[#e3ca95]">
-                The art of gifting
+                Utsav & Wedding Edition
               </p>
-              <p className="mt-1 font-serif text-xl">Made to be remembered.</p>
+              <p className="mt-1 font-serif text-xl">The Gold Standard of Elegance.</p>
             </div>
           </div>
         </div>
