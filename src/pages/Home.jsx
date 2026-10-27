@@ -148,13 +148,13 @@ export default function Home() {
 
           <div className="relative overflow-hidden rounded-[28px] border border-[#d9bd82]/25 bg-[#17130e]">
             <img
-              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1400&q=85"
+              src= "https://images.unsplash.com/photo-1728119884594-51af35d32c1b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
               alt="Luxury diamond jewelry necklace and earrings worn by high fashion woman model"
               fetchPriority="high"
               className="h-[480px] w-full object-cover object-top sm:h-[580px] lg:h-[660px]"
               onError={(event) => {
                 event.currentTarget.src =
-                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=85";
+                  "https://images.unsplash.com/photo-1728119884594-51af35d32c1b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D";
               }}
             />
 
