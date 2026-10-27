@@ -1,11 +1,11 @@
-import Navbar from "../components/Navbar";
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Heart, Search } from "lucide-react";
+import Navbar from "../components/Navbar";
 import api from "../api/api";
-import { Heart } from "lucide-react";
 
 export default function Products() {
-
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
@@ -13,22 +13,26 @@ export default function Products() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // ⭐ Add this here
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("lux_wishlist") || "[]");
+    } catch {
+      return [];
+    }
+  });
 
   const toggleWishlist = (id) => {
-    setWishlist((prev) =>
-      prev.includes(id)
+    setWishlist((prev) => {
+      const updated = prev.includes(id)
         ? prev.filter((item) => item !== id)
-        : [...prev, id]
-    );
+        : [...prev, id];
+
+      localStorage.setItem("lux_wishlist", JSON.stringify(updated));
+      return updated;
+    });
   };
 
-  // fetchProducts...
-
-  // ✅ FETCH PRODUCTS
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -36,255 +40,230 @@ export default function Products() {
       const res = await api.get("/api/products/explore", {
         params: {
           category,
-          keyword: search,
+          keyword: search.trim(),
         },
       });
 
-      if (!res.data || res.data.length === 0) {
-        setProducts([]);
-        return;
-      }
+      const result = Array.isArray(res.data) ? res.data : [];
 
       const data = await Promise.all(
-        res.data.map(async (p) => {
+        result.map(async (product) => {
           try {
             const priceRes = await api.get(
-              `/api/product-price/${p.id}`
+              `/api/product-price/${product.id}`
             );
 
             return {
-              ...p,
-              price: Number(priceRes.data),
+              ...product,
+              price: Number(priceRes.data) || 0,
             };
           } catch {
-            return { ...p, price: 0 };
+            return {
+              ...product,
+              price: Number(product.price) || 0,
+            };
           }
         })
       );
 
       setProducts(data);
-
     } catch (err) {
-      console.log(err);
-      setError("Failed to load products");
+      console.error("Failed to fetch products:", err);
+      setProducts([]);
+      setError("Unable to load products. Please try again.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [category, search]);
 
-  // ✅ DEBOUNCE SAFE EFFECT
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchProducts();
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [category, search]);
+  }, [fetchProducts]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-
+    <div className="min-h-screen bg-[#080806] text-[#f7f0e4]">
       <Navbar />
 
-      {/* HEADER */}
-      <div className="text-center py-12 px-6">
-        <h1 className="text-5xl md:text-6xl font-light tracking-[6px]">
-          LUXURY COLLECTION
+      {/* Hero heading */}
+      <section className="px-5 pb-10 pt-14 text-center sm:pt-20">
+        <p className="mb-4 text-xs uppercase tracking-[0.4em] text-[#c5a366]">
+          Discover LUXORA
+        </p>
+
+        <h1 className="font-serif text-4xl font-light tracking-[0.08em] sm:text-6xl">
+          THE ART OF <span className="text-[#d9bd82]">ELEGANCE</span>
         </h1>
-        <p className="text-gray-400 mt-3 tracking-widest text-sm">
-          Handcrafted elegance • Timeless beauty
-        </p>
-      </div>
 
-      {/* SEARCH */}
-      <div className="flex justify-center mb-10">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search jewellery..."
-          className="
-            w-full max-w-md
-            bg-white/10
-            border border-white/20
-            rounded-full
-            px-6 py-3
-            text-white
-            outline-none
-            focus:border-yellow-500
-          "
-        />
-      </div>
-
-      {/* CATEGORY */}
-      <div className="flex justify-center gap-5 mb-12">
-
-        {["Gold", "Silver", "Diamond"].map((item) => (
-          <button
-            key={item}
-            onClick={() => setCategory(item)}
-            className={`
-              px-6 py-2 rounded-full transition
-              ${category === item
-                ? "bg-yellow-500 text-black"
-                : "bg-white/10 hover:bg-yellow-500 hover:text-black"}
-            `}
-          >
-            {item}
-          </button>
-        ))}
-
-      </div>
-
-      {/* LOADING */}
-      {loading && (
-        <p className="text-center text-gray-400 animate-pulse">
-          Loading products...
-        </p>
-      )}
-
-      {/* ERROR */}
-      {error && (
-        <p className="text-center text-red-400">
-          {error}
-        </p>
-      )}
-
-      {/* EMPTY STATE */}
-      {!loading && products.length === 0 && !error && (
-        <p className="text-center text-gray-400">
-          No products found
-        </p>
-      )}
-
-      {/* PRODUCTS */}
-     {/* PRODUCTS */}
-<div className="grid md:grid-cols-3 gap-12 px-10 pb-24">
-
-  {products.map((p, i) => (
-
-    <div
-      key={p.id}
-      style={{ animationDelay: `${i * 0.1}s` }}
-      className="
-        relative
-        bg-white/5
-        border border-white/10
-        rounded-3xl
-        overflow-hidden
-        transition-all
-        duration-700
-        hover:scale-[1.05]
-        hover:border-yellow-400/40
-        hover:shadow-[0_0_40px_rgba(234,179,8,0.15)]
-        animate-[fadeIn_0.8s_ease_forwards]
-        opacity-0
-        group
-      "
-    >
-
-      {/* Wishlist */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          toggleWishlist(p.id);
-        }}
-        className="
-          absolute
-          top-4
-          right-4
-          z-20
-          w-10
-          h-10
-          rounded-full
-          bg-white
-          shadow-lg
-          flex
-          items-center
-          justify-center
-          transition-all
-          duration-300
-          hover:scale-110
-        "
-      >
-        <Heart
-          size={20}
-          className={`transition-all duration-300 ${
-            wishlist.includes(p.id)
-              ? "fill-red-500 text-red-500"
-              : "text-gray-500"
-          }`}
-        />
-      </button>
-
-      {/* Image */}
-      <div className="overflow-hidden">
-        <img
-          src={p.imageUrl}
-          alt={p.name}
-          className="
-            h-[260px]
-            w-full
-            object-cover
-            transition-all
-            duration-700
-            group-hover:scale-110
-          "
-        />
-      </div>
-
-      {/* Details */}
-      <div className="p-6 text-center">
-
-        <h2 className="text-xl font-medium">
-          {p.name}
-        </h2>
-
-        <p className="text-yellow-400 text-lg mt-2 font-semibold">
-          ₹ {p.price.toLocaleString()}
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-stone-400 sm:text-base">
+          Explore thoughtfully designed jewelry that celebrates
+          your individuality and timeless beauty.
         </p>
 
-        <button
-          onClick={() => navigate(`/product/${p.id}`)}
-          className="
-            mt-5
-            w-full
-            py-3
-            rounded-full
-            bg-yellow-500
-            text-black
-            font-semibold
-            tracking-wide
-            transition-all
-            duration-300
-            hover:bg-yellow-400
-            hover:scale-105
-          "
-        >
-          EXPLORE
-        </button>
+        <div className="mx-auto mt-8 h-px w-20 bg-[#c5a366]" />
+      </section>
 
-      </div>
+      {/* Search */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="mx-auto flex max-w-xl items-center gap-3 rounded-full border border-[#c5a366]/30 bg-white/[0.04] px-5 py-3 transition focus-within:border-[#d9bd82]">
+          <Search size={19} className="shrink-0 text-[#c5a366]" />
 
-    </div>
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search rings, necklaces, earrings..."
+            aria-label="Search jewelry"
+            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-stone-500"
+          />
+        </div>
 
-  ))}
+        {/* Category filters */}
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {["Gold", "Silver", "Diamond"].map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => setCategory(item)}
+              aria-pressed={category === item}
+              className={`rounded-full border px-6 py-2.5 text-sm transition duration-300 ${
+                category === item
+                  ? "border-[#d9bd82] bg-[#d9bd82] text-black"
+                  : "border-white/15 text-stone-300 hover:border-[#d9bd82] hover:text-[#e5d5b5]"
+              }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </section>
 
-      </div>
+      {/* Product status */}
+      <section className="mx-auto min-h-[280px] max-w-7xl px-5 pb-24 pt-12 sm:px-8">
+        {loading && (
+          <p className="py-16 text-center text-sm tracking-wide text-stone-400">
+            Discovering your collection...
+          </p>
+        )}
 
-      {/* ANIMATION */}
+        {!loading && error && (
+          <div className="py-16 text-center">
+            <p className="text-red-300">{error}</p>
+            <button
+              type="button"
+              onClick={fetchProducts}
+              className="mt-4 rounded-full border border-[#c5a366]/50 px-5 py-2 text-sm text-[#e5d5b5] hover:bg-[#d9bd82] hover:text-black"
+            >
+              Try again
+            </button>
+          </div>
+        )}
+
+        {!loading && !error && products.length === 0 && (
+          <p className="py-16 text-center text-stone-400">
+            No jewelry found. Try another search or category.
+          </p>
+        )}
+
+        {!loading && !error && products.length > 0 && (
+          <>
+            <div className="mb-6 flex items-center justify-between">
+              <p className="text-xs uppercase tracking-[0.2em] text-stone-400">
+                {category} Collection
+              </p>
+
+              <p className="text-xs text-stone-500">
+                {products.length} {products.length === 1 ? "piece" : "pieces"}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product, index) => (
+                <article
+                  key={product.id}
+                  style={{ animationDelay: `${index * 80}ms` }}
+                  className="group animate-[fadeIn_0.6s_ease_both] overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025] transition duration-500 hover:-translate-y-1 hover:border-[#c5a366]/40 hover:shadow-[0_16px_45px_rgba(197,163,102,0.08)]"
+                >
+                  <div className="relative overflow-hidden bg-[#14130f]">
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/product/${product.id}`)}
+                      className="block w-full"
+                      aria-label={`View ${product.name}`}
+                    >
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        loading="lazy"
+                        className="h-[280px] w-full object-cover transition duration-700 group-hover:scale-105"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleWishlist(product.id)}
+                      aria-label={
+                        wishlist.includes(product.id)
+                          ? "Remove from wishlist"
+                          : "Add to wishlist"
+                      }
+                      aria-pressed={wishlist.includes(product.id)}
+                      className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-[#f7f0e4] shadow-lg transition hover:scale-110"
+                    >
+                      <Heart
+                        size={19}
+                        className={
+                          wishlist.includes(product.id)
+                            ? "fill-red-500 text-red-500"
+                            : "text-stone-600"
+                        }
+                      />
+                    </button>
+                  </div>
+
+                  <div className="p-5">
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-[#b9a57e]">
+                      {product.category || category}
+                    </p>
+
+                    <h2 className="mt-2 line-clamp-2 min-h-12 font-serif text-xl text-[#f7f0e4]">
+                      {product.name}
+                    </h2>
+
+                    <p className="mt-3 text-lg font-medium text-[#d9bd82]">
+                      ₹{Number(product.price || 0).toLocaleString("en-IN")}
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/product/${product.id}`)}
+                      className="mt-5 w-full rounded-full border border-[#c5a366]/60 py-3 text-xs font-medium uppercase tracking-[0.2em] text-[#e5d5b5] transition hover:bg-[#d9bd82] hover:text-black"
+                    >
+                      Explore Piece
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+
       <style>{`
         @keyframes fadeIn {
-          0% {
+          from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(16px);
           }
-          100% {
+          to {
             opacity: 1;
             transform: translateY(0);
           }
         }
       `}</style>
-
     </div>
   );
 }

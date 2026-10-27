@@ -1,62 +1,111 @@
-import { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext();
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-export function AuthProvider({ children }) {
+const AuthContext = createContext(null);
 
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-
+function getStoredUser() {
+  try {
     const storedUser = localStorage.getItem("user");
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    if (!storedUser) return null;
+
+    const parsedUser = JSON.parse(storedUser);
+
+    if (
+      !parsedUser ||
+      typeof parsedUser !== "object" ||
+      Array.isArray(parsedUser)
+    ) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      return null;
     }
 
+    return parsedUser;
+  } catch (error) {
+    console.error("Unable to restore user session:", error);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    return null;
+  }
+}
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(getStoredUser);
+
+  // Synchronize authentication state with other browser tabs.
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "user" || event.key === "token") {
+        setUser(getStoredUser());
+        window.dispatchEvent(new Event("cartUpdated"));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
-  const login = (userData) => {
-
-    // userData contains:
-    // id, name, email, role, token, message
-
-    setUser(userData);
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify(userData)
-    );
-
-    // Optional: keep separate token for old code
-    if (userData.token) {
-      localStorage.setItem("token", userData.token);
+  const login = useCallback((userData) => {
+    if (!userData || typeof userData !== "object") {
+      throw new Error("Invalid login response.");
     }
 
-    window.dispatchEvent(new Event("cartUpdated"));
-  };
+    try {
+      localStorage.setItem("user", JSON.stringify(userData));
 
-  const logout = () => {
+      if (userData.token) {
+        localStorage.setItem("token", userData.token);
+      } else {
+        localStorage.removeItem("token");
+      }
 
+      setUser(userData);
+      window.dispatchEvent(new Event("cartUpdated"));
+    } catch (error) {
+      console.error("Unable to save login session:", error);
+      throw error;
+    }
+  }, []);
+
+  const logout = useCallback(() => {
     setUser(null);
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
 
     window.dispatchEvent(new Event("cartUpdated"));
+  }, []);
+
+  const value = {
+    user,
+    login,
+    logout,
+    isAuthenticated: Boolean(user),
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        login,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used inside an AuthProvider.");
+  }
+
+  return context;
+}

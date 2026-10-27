@@ -1,249 +1,271 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Package, RefreshCw, ShoppingBag } from "lucide-react";
+import OrderTimeline from "../components/OrderTimeline";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Orders() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-    const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    let isMounted = true;
 
-    useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-        const user = JSON.parse(localStorage.getItem("user"));
+        const storedUser = localStorage.getItem("user");
+        const user = storedUser ? JSON.parse(storedUser) : null;
         const token = user?.token;
 
-        if (!token) return;
-
-        axios.get(`${API_BASE_URL}/api/orders/my-orders`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((res) => {
-            const data = res.data;
-            setOrders(data?.content || data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-    }, []);
-
-    const steps = [
-        {
-            key: "PENDING",
-            label: "Order Placed",
-            field: "orderDate"
-        },
-        {
-            key: "CONFIRMED",
-            label: "Order Confirmed",
-            field: "confirmedAt"
-        },
-        {
-            key: "QUALITY_CHECK",
-            label: "Quality Check",
-            field: "qualityCheckedAt"
-        },
-        {
-            key: "PACKED",
-            label: "Packed",
-            field: "packedAt"
-        },
-        {
-            key: "SHIPPED",
-            label: "Shipped",
-            field: "shippedAt"
-        },
-        {
-            key: "OUT_FOR_DELIVERY",
-            label: "Out For Delivery",
-            field: "outForDeliveryAt"
-        },
-        {
-            key: "DELIVERED",
-            label: "Delivered",
-            field: "deliveredAt"
+        if (!token) {
+          if (isMounted) {
+            setError("Please log in to view your orders.");
+          }
+          return;
         }
-    ];
 
-    const formatDate = (date) => {
+        const response = await axios.get(
+          `${API_BASE_URL}/api/orders/my-orders`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-        if (!date) return "";
+        if (!isMounted) return;
 
-        return new Date(date).toLocaleString("en-IN", {
-            dateStyle: "medium",
-            timeStyle: "short"
-        });
+        const result = response.data;
+        const orderList = Array.isArray(result)
+          ? result
+          : Array.isArray(result?.content)
+          ? result.content
+          : [];
+
+        setOrders(orderList);
+      } catch (err) {
+        console.error("Failed to fetch orders:", err);
+
+        if (isMounted) {
+          setError(
+            err.response?.status === 401 ||
+              err.response?.status === 403
+              ? "Your session may have expired. Please log in again."
+              : "Unable to load your orders. Please try again."
+          );
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
     };
 
-    return (
+    fetchOrders();
 
-        <div className="min-h-screen bg-black text-white p-10">
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-            <h1 className="text-5xl font-bold mb-10">
-                My Orders
-            </h1>
+  const formatDate = (date) => {
+    if (!date) return "Not available";
 
-            {orders.length === 0 ? (
+    const parsedDate = new Date(date);
 
-                <p className="text-gray-400">
-                    No orders found
-                </p>
+    if (Number.isNaN(parsedDate.getTime())) {
+      return "Not available";
+    }
 
-            ) : (
+    return parsedDate.toLocaleString("en-IN", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  };
 
-                orders.map(order => {
+  const formatPrice = (amount) => {
+    const value = Number(amount);
 
-                    const currentIndex =
-                        steps.findIndex(s => s.key === order.status);
+    if (!Number.isFinite(value)) return "0.00";
 
-                    return (
+    return value.toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
 
-                        <div
-                            key={order.id}
-                            className="bg-white/10 border border-yellow-500/20 rounded-2xl p-6 mb-8"
-                        >
+  const formatStatus = (status) =>
+    typeof status === "string" && status.trim()
+      ? status.trim().replaceAll("_", " ").toUpperCase()
+      : "UNKNOWN";
 
-                            <div className="flex justify-between">
+  const handleRetry = () => {
+    // Re-run the component's data-loading effect by reloading the page.
+    window.location.reload();
+  };
 
-                                <div>
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <section className="border-b border-amber-400/10 bg-gradient-to-b from-amber-400/5 to-transparent px-5 py-12 md:px-10 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-xs uppercase tracking-[0.35em] text-amber-400">
+            LUXORA • YOUR COLLECTION
+          </p>
 
-                                    <h2 className="text-2xl font-bold">
-                                        Order #{order.id}
-                                    </h2>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+            My Orders
+          </h1>
 
-                                    <p className="text-gray-400 mt-2">
-                                        Ordered On :
-                                        <br />
-                                        {formatDate(order.orderDate)}
-                                    </p>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-gray-400 md:text-base">
+            Track your purchases and follow every stage of your
+            jewelry delivery.
+          </p>
+        </div>
+      </section>
 
-                                    {order.status === "DELIVERED" &&
-                                        order.deliveredAt && (
+      <main className="mx-auto max-w-7xl px-5 py-8 md:px-10 md:py-12">
+        {/* Loading */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="h-10 w-10 animate-spin rounded-full border-2 border-gray-700 border-t-amber-400" />
 
-                                            <p className="text-green-400 mt-3">
-                                                Delivered On :
-                                                <br />
-                                                {formatDate(order.deliveredAt)}
-                                            </p>
+            <p className="mt-5 text-sm text-gray-400">
+              Loading your orders...
+            </p>
+          </div>
+        )}
 
-                                        )}
+        {/* Error */}
+        {!loading && error && (
+          <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-8 text-center">
+            <p className="text-red-400">{error}</p>
 
-                                    {order.status === "CANCELLED" &&
-                                        order.cancelledAt && (
+            <button
+              onClick={handleRetry}
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-amber-400/30 px-5 py-2.5 text-sm text-amber-300 transition hover:bg-amber-400/10"
+            >
+              <RefreshCw size={16} />
+              Try Again
+            </button>
+          </div>
+        )}
 
-                                            <p className="text-red-400 mt-3">
-                                                Cancelled On :
-                                                <br />
-                                                {formatDate(order.cancelledAt)}
-                                            </p>
+        {/* Empty orders */}
+        {!loading && !error && orders.length === 0 && (
+          <div className="rounded-2xl border border-amber-400/15 bg-neutral-950 px-6 py-16 text-center">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-amber-400/20 bg-amber-400/5">
+              <ShoppingBag className="text-amber-400" size={28} />
+            </div>
 
-                                        )}
+            <h2 className="mt-6 text-xl font-semibold">
+              No orders yet
+            </h2>
 
-                                </div>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-400">
+              Your next favorite piece is waiting for you.
+              Explore the collection to get started.
+            </p>
 
-                                <div className="text-right">
+            <a
+              href="/products"
+              className="mt-6 inline-flex rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-black transition hover:bg-amber-300"
+            >
+              Explore Collection
+            </a>
+          </div>
+        )}
 
-                                    <h2 className="text-3xl font-bold text-yellow-400">
-                                        ₹{order.totalAmount.toLocaleString("en-IN")}
-                                    </h2>
+        {/* Orders list */}
+        {!loading && !error && orders.length > 0 && (
+          <div className="space-y-7">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-gray-400">
+                {orders.length} {orders.length === 1 ? "order" : "orders"}
+              </p>
+            </div>
 
-                                    <span className="inline-block mt-4 px-5 py-2 rounded-full bg-yellow-500 text-black font-bold">
-                                        {order.status.replaceAll("_", " ")}
-                                    </span>
+            {orders.map((order) => {
+              const status = formatStatus(order.status);
+              const isCancelled = status === "CANCELLED";
+              const isDelivered = status === "DELIVERED";
 
-                                </div>
-
-                            </div>
-
-                            <div className="mt-8 border-l-2 border-gray-700 pl-6 space-y-6">
-
-                                {order.status === "CANCELLED" ? (
-
-                                    <>
-                                        <div>
-
-                                            <h3 className="text-red-400 font-bold text-lg">
-                                                Order Cancelled
-                                            </h3>
-
-                                            <p className="text-gray-400 text-sm">
-                                                {formatDate(order.cancelledAt)}
-                                            </p>
-
-                                        </div>
-                                    </>
-
-                                ) : (
-
-                                    steps.map((step, index) => {
-
-                                        const completed =
-                                            index <= currentIndex;
-
-                                        const date =
-                                            order[step.field];
-
-                                        return (
-
-                                            <div
-                                                key={step.key}
-                                                className="relative"
-                                            >
-
-                                                <div
-                                                    className={`
-                                                    absolute
-                                                    -left-[34px]
-                                                    top-1
-                                                    w-4
-                                                    h-4
-                                                    rounded-full
-                                                    ${completed
-                                                        ? "bg-green-500"
-                                                        : "bg-gray-600"}
-                                                `}
-                                                />
-
-                                                <h3
-                                                    className={`font-bold text-lg
-                                                    ${completed
-                                                        ? "text-green-400"
-                                                        : "text-gray-500"}
-                                                `}
-                                                >
-                                                    {step.label}
-                                                </h3>
-
-                                                <p className="text-sm text-gray-400">
-
-                                                    {date
-                                                        ? formatDate(date)
-                                                        : "Pending"}
-
-                                                </p>
-
-                                            </div>
-
-                                        );
-
-                                    })
-
-                                )}
-
-                            </div>
-
+              return (
+                <article
+                  key={order.id}
+                  className="overflow-hidden rounded-2xl border border-amber-400/15 bg-neutral-950 shadow-xl shadow-black/20"
+                >
+                  {/* Order top section */}
+                  <div className="flex flex-col gap-5 border-b border-white/5 p-5 sm:flex-row sm:items-start sm:justify-between md:p-7">
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-400/5">
+                          <Package className="text-amber-400" size={21} />
                         </div>
 
-                    );
+                        <div>
+                          <h2 className="text-lg font-semibold text-white">
+                            Order #{order.id}
+                          </h2>
 
-                })
+                          <p className="mt-1 text-xs text-gray-500">
+                            Ordered on {formatDate(order.orderDate)}
+                          </p>
+                        </div>
+                      </div>
 
-            )}
+                      {isDelivered && order.deliveredAt && (
+                        <p className="mt-4 text-sm text-emerald-400">
+                          Delivered on {formatDate(order.deliveredAt)}
+                        </p>
+                      )}
 
-        </div>
+                      {isCancelled && order.cancelledAt && (
+                        <p className="mt-4 text-sm text-red-400">
+                          Cancelled on {formatDate(order.cancelledAt)}
+                        </p>
+                      )}
+                    </div>
 
-    );
+                    <div className="sm:text-right">
+                      <p className="text-xs uppercase tracking-widest text-gray-500">
+                        Order Total
+                      </p>
 
+                      <p className="mt-2 text-2xl font-semibold text-amber-300">
+                        ₹{formatPrice(order.totalAmount)}
+                      </p>
+
+                      <span
+                        className={`mt-3 inline-flex rounded-full border px-4 py-1.5 text-xs font-semibold ${
+                          isCancelled
+                            ? "border-red-500/30 bg-red-500/10 text-red-400"
+                            : isDelivered
+                            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                            : "border-amber-400/25 bg-amber-400/10 text-amber-300"
+                        }`}
+                      >
+                        {status}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Reusable order timeline */}
+                  <div className="p-4 md:p-6">
+                    <OrderTimeline status={status} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </main>
+    </div>
+  );
 }

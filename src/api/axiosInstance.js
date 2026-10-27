@@ -1,23 +1,32 @@
+
 import axios from "axios";
 
-
-
-//This is work only for localhost, for production you need to change the baseURL to your production server URL
-
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: (
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"
+  ).replace(/\/+$/, ""),
 });
 
+// Attach JWT token automatically to every request.
+api.interceptors.request.use(
+  (config) => {
+    let token = localStorage.getItem("token");
 
-// attach token automatically
-api.interceptors.request.use((config) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      token = user?.token || token;
+    } catch (error) {
+      console.error("Failed to read user session:", error);
+    }
 
-  if (user?.token) {
-    config.headers.Authorization = `Bearer ${user.token}`;
-  }
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-  return config;
-});
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 export default api;

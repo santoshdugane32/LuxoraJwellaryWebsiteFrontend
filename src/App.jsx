@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -28,27 +29,16 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-
         <Routes>
 
           {/* ================= PUBLIC ROUTES ================= */}
-
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<ProductDetails />} />
 
-          {/* ================= USER ROUTES ================= */}
-
-          <Route
-            path="/products"
-            element={
-              <ProtectedRoute>
-                <Products />
-              </ProtectedRoute>
-            }
-          />
-
+          {/* ================= PROTECTED USER ROUTES ================= */}
           <Route
             path="/cart"
             element={
@@ -95,7 +85,6 @@ export default function App() {
           />
 
           {/* ================= ADMIN ROUTES ================= */}
-
           <Route
             path="/admin"
             element={
@@ -132,13 +121,13 @@ export default function App() {
             }
           />
 
+          {/* ================= PAYMENT ROUTE ================= */}
           <Route
             path="/payment-success"
             element={<PaymentSuccess />}
           />
 
         </Routes>
-
       </BrowserRouter>
     </AuthProvider>
   );
