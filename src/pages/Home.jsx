@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -9,7 +8,6 @@ import {
   FaShieldAlt,
   FaUndo,
   FaTruck,
-  FaPlay,
 } from "react-icons/fa";
 
 const collections = [
@@ -18,7 +16,7 @@ const collections = [
     title: "Diamond Rings",
     description: "Elegant pieces for life's most precious moments.",
     image:
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=85",
+      "https://headiamonds.com/images/hero/hea-diamonds-hero.png",
     category: "Rings",
   },
   {
@@ -26,7 +24,7 @@ const collections = [
     title: "Gold Necklaces",
     description: "Understated beauty, crafted to be treasured.",
     image:
-      "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1000&q=85",
+      "https://www.jewar1974.com/hero-jewellery.jpg",
     category: "Necklaces",
   },
   {
@@ -34,7 +32,7 @@ const collections = [
     title: "Fine Earrings",
     description: "A little brilliance for every occasion.",
     image:
-      "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=1000&q=85",
+      "https://agcojewellery.com/cdn/shop/files/AdobeStock_1059905582.jpg?v=1741326990&width=2000",
     category: "Earrings",
   },
 ];
@@ -62,42 +60,17 @@ const benefits = [
   },
 ];
 
-const heroImage =
-  "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1400&q=85";
-
-const editorialImage =
-  "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=85";
-
-function ImageWithFallback({ src, fallback, alt, className, ...props }) {
-  const [imageSrc, setImageSrc] = useState(src);
-
-  return (
-    <img
-      src={imageSrc}
-      alt={alt}
-      className={className}
-      onError={() => {
-        if (fallback && imageSrc !== fallback) {
-          setImageSrc(fallback);
-        }
-      }}
-      {...props}
-    />
-  );
-}
-
 export default function Home() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#080806] text-[#f7f0e4]">
       <Navbar />
 
-      {/* Gold rate */}
       <div className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
         <GoldRateBox />
       </div>
 
-      {/* Hero */}
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-12 lg:px-10">
+      {/* Hero section */}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 md:py-16 lg:grid-cols-2 lg:gap-12 lg:px-10">
         <div className="relative z-10">
           <p className="mb-6 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.3em] text-[#d5b878] sm:text-xs">
             <span className="h-px w-9 bg-[#d5b878]" />
@@ -132,7 +105,7 @@ export default function Home() {
               className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 text-sm text-stone-200 transition hover:border-[#d9bd82] hover:text-[#d9bd82]"
             >
               Discover LUXORA
-              <FaPlay size={10} />
+              <FaArrowRight size={13} />
             </Link>
           </div>
 
@@ -166,20 +139,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero jewelry image */}
+        {/* New hero image */}
         <div className="relative mx-auto w-full max-w-2xl">
-          <div className="absolute -inset-3 rounded-[45%] bg-[#a47735]/10 blur-3xl" />
+          <div className="absolute -inset-5 rounded-full bg-[#a47735]/15 blur-3xl" />
 
-          <div className="relative overflow-hidden rounded-t-[45%] rounded-b-2xl border border-[#d9bd82]/25 bg-[#100e0a]">
-            <ImageWithFallback
-              src={heroImage}
-              alt="Luxury jewelry collection"
-              fallback={collections[1].image}
+          <div className="relative overflow-hidden rounded-t-[42%] rounded-b-2xl border border-[#d9bd82]/25">
+            <img
+              src="https://cdn.pixla.ai/storage/v1/object/public/images/1b851341-68b9-4c1a-a93e-3179845501ba/ai-influencer/1782659150147-c4b33fa2-jewelry-try-on-Necklaces-Pendants.png"
+              alt="Gold pendant necklace against black velvet"
               fetchPriority="high"
-              className="h-[400px] w-full object-cover object-center sm:h-[540px] lg:h-[620px]"
+              className="h-[420px] w-full object-cover object-center sm:h-[540px] lg:h-[600px]"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/5" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10" />
 
             <div className="absolute bottom-6 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-8 sm:left-8 sm:right-8">
               <div>
@@ -199,15 +171,6 @@ export default function Home() {
                 <FaArrowRight size={14} />
               </Link>
             </div>
-          </div>
-
-          <div className="absolute -bottom-4 -left-2 border border-[#d9bd82]/30 bg-[#11100d]/95 px-4 py-3 sm:-left-6 sm:px-6 sm:py-4">
-            <p className="text-[9px] uppercase tracking-[0.2em] text-stone-400">
-              Designed to be treasured
-            </p>
-            <p className="mt-1 font-serif text-lg text-[#e3ca95]">
-              Your story. Your sparkle.
-            </p>
           </div>
         </div>
       </section>
@@ -240,15 +203,14 @@ export default function Home() {
               className="group relative isolate overflow-hidden border border-[#d9bd82]/20 bg-[#100f0c]"
             >
               <div className="relative h-[360px] overflow-hidden sm:h-[420px]">
-                <ImageWithFallback
+                <img
                   src={item.image}
                   alt={item.title}
-                  fallback={heroImage}
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/5" />
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
@@ -303,10 +265,9 @@ export default function Home() {
           </div>
 
           <div className="min-h-[300px] overflow-hidden sm:min-h-[400px]">
-            <ImageWithFallback
-              src={editorialImage}
-              alt="Fine jewelry styled for a special occasion"
-              fallback={collections[0].image}
+            <img
+              src="https://foreverforlove.com/cdn/shop/files/ring1.jpg?v=1771322580&width=2400"
+              alt="Diamond jewelry photographed against a luxurious dark background"
               loading="lazy"
               className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:min-h-[400px]"
             />
