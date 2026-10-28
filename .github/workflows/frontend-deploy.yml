@@ -1,3 +1,4 @@
+
 name: LUXORA Frontend CI/CD
 
 on:
@@ -24,7 +25,9 @@ jobs:
         run: |
           test -f Dockerfile
           test -f package.json
-          test -f .env.production
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -36,6 +39,7 @@ jobs:
         run: |
           docker build \
             --pull \
+            --build-arg VITE_API_BASE_URL="${{ vars.VITE_API_BASE_URL }}" \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
 
       - name: Push Frontend Docker Image
@@ -57,10 +61,16 @@ jobs:
 
             IMAGE="$DOCKERHUB_USERNAME/jwellary-frontend-web:latest"
 
+            echo "Pulling latest frontend image..."
             docker pull "$IMAGE"
 
-            docker rm -f luxora-frontend 2>/dev/null || true
+            echo "Checking port 80..."
+            if docker ps --format '{{.Names}}' | grep -qx 'luxora-frontend'; then
+              docker stop luxora-frontend
+              docker rm luxora-frontend
+            fi
 
+            echo "Starting frontend..."
             docker run -d \
               --name luxora-frontend \
               --restart unless-stopped \
@@ -70,9 +80,12 @@ jobs:
             sleep 5
 
             if [ "$(docker inspect -f '{{.State.Running}}' luxora-frontend)" != "true" ]; then
-              docker logs --tail 100 luxora-frontend
+              docker logs --tail 100 luxora-frontend || true
               exit 1
             fi
 
+            echo "Frontend container is running:"
             docker ps --filter name=luxora-frontend
+
+            echo "Recent frontend logs:"
             docker logs --tail 30 luxora-frontend

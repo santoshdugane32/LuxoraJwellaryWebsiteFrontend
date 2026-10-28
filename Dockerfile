@@ -13,6 +13,10 @@ RUN npm ci
 # Copy frontend source code
 COPY . .
 
+# Pass production API URL from GitHub Actions
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+
 # Build production files
 RUN npm run build
 
