@@ -10,7 +10,7 @@ const api = axios.create({
   },
 });
 
-// Attach the JWT token to API requests.
+// Attach JWT token to API requests.
 api.interceptors.request.use(
   (config) => {
     let token = localStorage.getItem("token");
@@ -18,7 +18,6 @@ api.interceptors.request.use(
     try {
       const storedUser = localStorage.getItem("user");
       const user = storedUser ? JSON.parse(storedUser) : null;
-
       token = user?.token || token;
     } catch (error) {
       console.error("Unable to read stored user:", error);
