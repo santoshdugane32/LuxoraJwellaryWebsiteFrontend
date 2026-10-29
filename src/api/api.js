@@ -3,7 +3,8 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: (
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"
+    import.meta.env.VITE_API_BASE_URL ||
+    "http://16.4.54.198:8080"
   ).replace(/\/+$/, ""),
   headers: {
     "Content-Type": "application/json",
