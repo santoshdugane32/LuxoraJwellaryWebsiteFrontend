@@ -384,7 +384,7 @@ export default function Checkout() {
             if (verifyRes.data?.success !== true) {
               throw new Error(
                 verifyRes.data?.message ||
-                  "Payment verification is not complete."
+                "Payment verification is not complete."
               );
             }
 
@@ -428,7 +428,7 @@ export default function Checkout() {
 
         setErrorMessage(
           response.error?.description ||
-            "Payment failed. Please try again."
+          "Payment failed. Please try again."
         );
 
         checkoutLock.current = false;
@@ -459,16 +459,16 @@ export default function Checkout() {
       } else if (status === 400 || status === 409) {
         setErrorMessage(
           data?.message ||
-            data?.detail ||
-            (typeof data === "string"
-              ? data
-              : "Please check your order details and payment status.")
+          data?.detail ||
+          (typeof data === "string"
+            ? data
+            : "Please check your order details and payment status.")
         );
       } else {
         setErrorMessage(
           data?.message ||
-            error.message ||
-            "Unable to start checkout. Please try again."
+          error.message ||
+          "Unable to start checkout. Please try again."
         );
       }
 
@@ -686,7 +686,19 @@ export default function Checkout() {
                 cart.length === 0 ||
                 total <= 0
               }
-              onClick={placeOrder}
+              onClick={() => {
+                console.log("PAY BUTTON CLICKED");
+                console.log({
+                  loading,
+                  pricingLoading,
+                  cartLength: cart.length,
+                  total,
+                  API_BASE_URL,
+                  RAZORPAY_KEY: Boolean(RAZORPAY_KEY),
+                });
+
+                placeOrder();
+              }}
               className="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#c5a366] to-[#ead6a4] px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading || pricingLoading ? (
